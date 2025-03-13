@@ -4,7 +4,10 @@ import "./App.css";
 
 function App() {
   const [inputState, setInputState] = useState("");
-  const [shortLinkState, setShortLinkState] = useState("");
+  const [shortLinkState, setShortLinkState] = useState({
+    valid: false,
+    message: "",
+  });
 
   const apiCall = (e) => {
     e.preventDefault();
@@ -22,6 +25,11 @@ function App() {
     });
   };
 
+  const copyToClipboard = (e) => {
+    const copyText = e.target.previousSibling.innerText;
+    navigator.clipboard.writeText(copyText);
+  }
+
   return (
     <>
       <div className="app">
@@ -35,7 +43,8 @@ function App() {
           <button type="submit">Get shortened link</button>
         </form>
         <div>
-          <a className="shortened-link-display" href={shortLinkState} target="_blank">{shortLinkState}</a>
+          <p className="shortened-link-display">{shortLinkState.message}</p>
+          {shortLinkState.valid ? <button onClick={copyToClipboard}>Copy to clipboad</button> : <></>}
         </div>
       </div>
     </>
