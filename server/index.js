@@ -3,9 +3,11 @@ const app = express();
 const cors = require("cors");
 const db = require("./db");
 const { v4: uuidv4 } = require("uuid");
+const path = require("path");
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 const referenceTable = [
   "0",
@@ -73,8 +75,8 @@ const referenceTable = [
 ];
 
 app.get("/", (req, res) => {
-  console.log(req);
-  return res.send("Hello from the server!");
+  res.writeHead(200);
+  return res.sendFile("index.html");
 });
 
 app.get("/:linkId", (req, res) => {
