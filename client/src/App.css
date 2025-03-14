@@ -1,0 +1,52 @@
+html,
+body {
+  margin: 0;
+}
+
+.nav-bar {
+  height: 15vh;
+  background-color: aliceblue;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.link-input {
+  margin-right: 10px;
+}
+
+.header-text {
+  margin: 0;
+}
+
+.short-link-container {
+    display: inline;
+    width: auto;
+    position: relative;
+}
+
+.copy-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border-radius: 10px;
+    border: none;
+    transition: transform .2s;
+}
+
+.copy-button:hover {
+    transform: scale(1.1);
+}
+
+.icon {
+    max-width: 16px;
+}
