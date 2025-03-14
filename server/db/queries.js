@@ -1,29 +1,46 @@
-const pool = require("./pool");
+let db = [];
 
-async function getOldLink(newLink) {
-    const result = await pool.query('SELECT * FROM links WHERE newlink=$1', [newLink]);
-    if (result.rows.length > 0) {
-        return result.rows[0].oldlink;
-    } else {
-        return null;
+function getOldLink(newLink) {
+  let result = null;
+  for (let i = 0; i < db.length; i++) {
+    if (db[i].newLink === newLink) {
+      result = db[i].oldLink;
+      break;
     }
+  }
+  if (result) {
+    return result;
+  } else {
+    return null;
+  }
 }
 
-async function insertNewLink(oldLink, newLink) {
-    await pool.query('INSERT INTO links (oldlink, newlink) VALUES($1, $2)', [oldLink, newLink]);
+function insertNewLink(oldLink, newLink) {
+  db.push({
+    newLink: newLink,
+    oldLink: oldLink,
+  });
+  console.log(db);
 }
 
-
-async function queryOldLinks(linkToFind) {
-    const result = await pool.query('SELECT * FROM links WHERE oldlink=$1', [linkToFind]);
-    return ({
-        linkExists: result.rows.length === 0,
-        newLink: result.rows[0] ? result.rows[0].newlink : null
-    });
+function queryOldLinks(linkToFind) {
+  let result = null;
+  let exists = false;
+  for (let i = 0; i < db.length; i++) {
+    if (db[i].oldLink === linkToFind) {
+      result = db[i].newLink;
+      exists = true;
+      break;
+    }
+  }
+  return {
+    linkExists: exists,
+    newLink: exists ? result : null,
+  };
 }
 
 module.exports = {
-    getOldLink,
-    insertNewLink,
-    queryOldLinks
+  getOldLink,
+  insertNewLink,
+  queryOldLinks,
 };

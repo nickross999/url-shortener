@@ -4,7 +4,7 @@ body {
 }
 
 .nav-bar {
-  height: 15vh;
+  height: 5vh;
   background-color: aliceblue;
   margin: 0;
   display: flex;
@@ -13,10 +13,10 @@ body {
 }
 
 .app {
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .link-input {
@@ -28,25 +28,42 @@ body {
 }
 
 .short-link-container {
-    display: inline;
-    width: auto;
-    position: relative;
+  display: inline;
+  width: auto;
+  position: relative;
 }
 
 .copy-button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: transparent;
-    border-radius: 10px;
-    border: none;
-    transition: transform .2s;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  border-radius: 10px;
+  border: none;
+  transition: transform 0.2s;
 }
 
 .copy-button:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.jump-class {
+  animation: jump .2s linear 1;
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .icon {
-    max-width: 16px;
+  max-width: 16px;
+  pointer-events: none;
 }

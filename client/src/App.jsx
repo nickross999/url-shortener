@@ -22,6 +22,7 @@ function App() {
         url: inputState,
       },
     }).then((data) => {
+      console.log(data);
       setShortLinkState(data.data);
     });
   };
@@ -29,13 +30,20 @@ function App() {
   const copyToClipboard = (e) => {
     const copyText = e.target.previousSibling.innerText;
     navigator.clipboard.writeText(copyText);
+    e.target.classList.add("jump-class");
   };
 
   const shortLinkDisplay = (
     <fieldset className="short-link-container">
       <legend>Your Link</legend>
       <p className="shortened-link-display">{shortLinkState.message}</p>
-      <button className="copy-button" onClick={copyToClipboard}>
+      <button
+        className="copy-button"
+        onAnimationEnd={(e) => {
+          e.target.classList.remove("jump-class");
+        }}
+        onClick={copyToClipboard}
+      >
         <img className="icon" src={copyIcon} />
       </button>
     </fieldset>
@@ -62,7 +70,7 @@ function App() {
           ></input>
           <button type="submit">Get shortened link</button>
         </form>
-        {shortLinkState.valid ? shortLinkDisplay : <></>}
+        {shortLinkState.valid ? shortLinkDisplay : <p>{shortLinkState.message}</p>}
       </div>
     </>
   );
