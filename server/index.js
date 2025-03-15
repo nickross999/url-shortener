@@ -11,8 +11,9 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 
 function isValidURL(string) {
   const pattern = new RegExp(
-    '^(https?:\\/\\/)?' + 
+    '^([a-zA-Z]+:\\/\\/)?' + 
       '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + 
+      '((\\d{1,3}\\.){3}\\d{1,3}))' + 
       '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + 
       '(\\?[;&a-z\\d%_.~+=-]*)?' + 
       '(\\#[-a-z\\d_]*)?$', 
@@ -27,11 +28,10 @@ app.get("/", (req, res) => {
 
 app.get("/:linkId", (req, res) => {
   const link = db.getOldLink(req.params.linkId);
-  console.log(link);
     if (link) {
       return res.redirect(link);
     }
-    return res.send(req.params.linkId);
+    return res.redirect("http://localhost:8080");
 });
 
 app.post("/", (req, res) => {

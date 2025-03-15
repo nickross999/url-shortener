@@ -5,12 +5,16 @@ A web app that takes a URL and returns a shortened link that will redirect to th
 ## Libraries Used
 
 ###### Client-side
+
 - React
 - Axios
 
 ###### Server-side
+
 - Express
-- cors
+- CORS
 - uuid
 
 ## How to Run
+
+Simply run Run.sh in your terminal \([Node.js](https://nodejs.org/en) required\). The script will automatically install the necessary packages, build the front-end, and start the server.

@@ -8,11 +8,7 @@ function getOldLink(newLink) {
       break;
     }
   }
-  if (result) {
-    return result;
-  } else {
-    return null;
-  }
+  return result;
 }
 
 function insertNewLink(oldLink, newLink) {
@@ -20,7 +16,6 @@ function insertNewLink(oldLink, newLink) {
     newLink: newLink,
     oldLink: oldLink,
   });
-  console.log(db);
 }
 
 function queryOldLinks(linkToFind) {
@@ -35,7 +30,7 @@ function queryOldLinks(linkToFind) {
   }
   return {
     linkExists: exists,
-    newLink: exists ? result : null,
+    newLink: result,
   };
 }
 
