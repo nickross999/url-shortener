@@ -5,7 +5,6 @@ RUN npm install
 RUN npm run build
 
 FROM node:slim AS backend
-ENV NODE_ENV=production
 COPY --from=frontend /app/client/dist/ /app/client/dist/
 WORKDIR /app/server/
 COPY /server/ .
